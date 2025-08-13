@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Peripherals/base.h"
 #include "common.h"
+#include "Peripherals/base.h"
+
 
 struct GpioPinData {
     reg32 resv;
@@ -14,21 +15,15 @@ struct GpioRegs {
     struct GpioPinData output_clear;
     struct GpioPinData level;
     struct GpioPinData ev_detect_status;
-    struct GpioPinData re_detect_eneble;    
-    struct GpioPinData fe_detect_eneble; 
-    struct GpioPinData hi_detect_eneble; 
-    struct GpioPinData lo_detect_eneble;
+    struct GpioPinData re_detect_enable;    
+    struct GpioPinData fe_detect_enable; 
+    struct GpioPinData hi_detect_enable; 
+    struct GpioPinData lo_detect_enable;
     struct GpioPinData async_re_detect; 
     struct GpioPinData async_fe_detect; 
     reg32 resv;
-#if RPI_VERSION ==3
     reg32 pupd_enable;
-    reg32 pupd_enable_clock[2];
-#endif
-
-#if RPI_VERSION == 4
-    reg32 pupd_control[4];
-#endif   
+    reg32 pupd_enable_clock[2];  
 };
 
 #define REGS_GPIO ((struct GpioRegs *)(PBASE + 0x00200000))

@@ -50,7 +50,7 @@ char uart_recv() {
 void uart_send_string(char *str) {
     while(*str) {
         if(*str == '\n') {
-            uart_send('\n');
+            uart_send('\r');
         }
 
         uart_send(*str);
