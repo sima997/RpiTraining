@@ -13,13 +13,11 @@ void gpio_pin_set_func(u8 pinNumber, GpioFunc func) {
 }
 
 void gpio_pin_enable(u8 pinNumber) {
-#if RPI_VERSION == 3
     REGS_GPIO->pupd_enable = 0;
     delay(150);
-    REGS_GPIO->pupd_enable_clocks[pinNumber / 32] = 1 << (pinNumber % 32);
+    REGS_GPIO->pupd_enable_clock[pinNumber / 32] = 1 << (pinNumber % 32);
     delay(150);
     REGS_GPIO->pupd_enable = 0;
-    REGS_GPIO->pupd_enable_clocks[pinNumber / 32] = 0;
-#endif
+    REGS_GPIO->pupd_enable_clock[pinNumber / 32] = 0;
 
 }

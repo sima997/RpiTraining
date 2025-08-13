@@ -1,8 +1,8 @@
 RPI_VERSION ?= 4
 
-BOOTMNT ?= /media/parallels/boot
+BOOTMNT ?= /media/$(USER)/bootfs
 
-ARMGNU ?= aarch64-none-linux-gnu
+ARMGNU ?= aarch64-linux-gnu
 
 COPS = -DRPI_VERSION=$(RPI_VERSION) -Wall -nostdlib -nostartfiles -ffreestanding \
 	   -Iinclude -mgeneral-regs-only
