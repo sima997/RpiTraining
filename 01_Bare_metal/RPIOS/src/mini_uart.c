@@ -1,6 +1,6 @@
 #include "gpio.h"
 #include "utills.h"
-#include "Peripherals/aux.h"
+#include "Peripherals/auxiliary.h"
 #include "mini_uart.h"
 
 #define TXD 14
@@ -14,21 +14,21 @@ void uart_init() {
     gpio_pin_enable(TXD);
     gpio_pin_enable(RXD);
 
-    REGS_AUX->enables = 1;
-    REGS_AUX->mu_control = 0;
-    REGS_AUX->mu_ier = 0;
-    REGS_AUX->mu_lcr = 3;
-    REGS_AUX->mu_mcr = 0;
+    REGS_auxiliary->enables = 1;
+    REGS_auxiliary->mu_control = 0;
+    REGS_auxiliary->mu_ier = 0;
+    REGS_auxiliary->mu_lcr = 3;
+    REGS_auxiliary->mu_mcr = 0;
 
 #if RPI_VERSION == 3
-    REGS_AUX->mu_baud_rate = 270; // = 115200 @ 250 Mhz
+    REGS_auxiliary->mu_baud_rate = 270; // = 115200 @ 250 Mhz
 #endif
 
 #if RPI_VERSION == 4
-    REGS_AUX->mu_baud_rate = 541; // = 115200 @ 500 Mhz
+    REGS_auxiliary->mu_baud_rate = 541; // = 115200 @ 500 Mhz
 #endif
 
-    REGS_AUX->mu_control = 3;
+    REGS_auxiliary->mu_control = 3;
 
     uart_send('\r');
     uart_send('\n');
@@ -36,15 +36,15 @@ void uart_init() {
 }
 
 void uart_send(char c) {
-    while(!(REGS_AUX->mu_lsr & (1<<5)));
+    while(!(REGS_auxiliary->mu_lsr & (1<<5)));
 
-    REGS_AUX->mu_io = c;
+    REGS_auxiliary->mu_io = c;
 }
 
 char uart_recv() {
-    while(!(REGS_AUX->mu_lsr & (1<<0)));
+    while(!(REGS_auxiliary->mu_lsr & (1<<0)));
 
-    return REGS_AUX->mu_io & 0xff;
+    return REGS_auxiliary->mu_io & 0xff;
 }
 
 void uart_send_string(char *str) {

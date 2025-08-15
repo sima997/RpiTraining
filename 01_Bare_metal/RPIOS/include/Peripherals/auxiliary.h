@@ -1,12 +1,11 @@
 #pragma once
 
-
-#include "common.h"
 #include "Peripherals/base.h"
+#include "common.h"
 
 
 
-struct AuxRegs {
+struct auxiliaryRegs {
     reg32 irq_status;
     reg32 enables;
     reg32 resv[14];
@@ -24,4 +23,4 @@ struct AuxRegs {
     reg32 resv2[30]; //Other peripherals not used
 };
 
-#define REGS_AUX ((struct AuxRegs *)(PBASE + 0x00215000))
+#define REGS_auxiliary ((struct auxiliaryRegs *)(PBASE + 0x00215000))
