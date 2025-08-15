@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "line_plot.h": "c",
+        "waveforms.h": "c"
+    }
+}
